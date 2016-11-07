@@ -10,7 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MyTripz.Services;
-
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using MyTripz.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyTripz
 {
@@ -34,6 +36,9 @@ namespace MyTripz
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            var connection = @"Server=.\sqlexpress;Database=Tripz;Trusted_Connection=True;";
+            services.AddDbContext<TripzContext>(options => options.UseSqlServer(connection));
 
 #if DEBUG
             services.AddScoped<IMailService, DebugMailService>();

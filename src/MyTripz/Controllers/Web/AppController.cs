@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyTripz.Models;
 using MyTripz.Services;
 using MyTripz.ViewModels;
 using System;
@@ -12,14 +13,17 @@ namespace MyTripz.Controllers.Web
     public class AppController : Controller
     {
         private IMailService _mailService;
+        private TripzContext _context;
 
-        public AppController(IMailService service)
+        public AppController(IMailService service, TripzContext context)
         {
             _mailService = service;
+            _context = context;
         }
         public IActionResult Index()
         {
-            return View();
+            var trips = _context.Trips.OrderBy(t=>t.Name).ToList();
+            return View(trips);
         }
 
         public IActionResult About()
