@@ -49,6 +49,8 @@ namespace MyTripz
             services.AddDbContext<TripzContext>(options => options.UseSqlServer(connection));
             services.AddTransient<TripzContextSeedData>();
             services.AddScoped<ITripzRepository, TripzRepository>();
+            services.AddScoped<CoordService>();
+
 #if DEBUG
             services.AddScoped<IMailService, DebugMailService>();
 #else
