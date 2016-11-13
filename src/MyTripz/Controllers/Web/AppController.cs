@@ -13,16 +13,16 @@ namespace MyTripz.Controllers.Web
     public class AppController : Controller
     {
         private IMailService _mailService;
-        private TripzContext _context;
+        private ITripzRepository _repository;
 
-        public AppController(IMailService service, TripzContext context)
+        public AppController(IMailService service, ITripzRepository repository)
         {
             _mailService = service;
-            _context = context;
+            _repository = repository;
         }
         public IActionResult Index()
         {
-            var trips = _context.Trips.OrderBy(t=>t.Name).ToList();
+            var trips = _repository.GetAllTrips();
             return View(trips);
         }
 

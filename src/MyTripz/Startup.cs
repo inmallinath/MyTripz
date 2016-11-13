@@ -40,6 +40,7 @@ namespace MyTripz
             var connection = @"Server=.\sqlexpress;Database=Tripz;Trusted_Connection=True;";
             services.AddDbContext<TripzContext>(options => options.UseSqlServer(connection));
             services.AddTransient<TripzContextSeedData>();
+            services.AddScoped<ITripzRepository, TripzRepository>();
 #if DEBUG
             services.AddScoped<IMailService, DebugMailService>();
 #else
