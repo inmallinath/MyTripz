@@ -13,6 +13,9 @@ using MyTripz.Services;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using MyTripz.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using MyTripz.ViewModels;
 
 namespace MyTripz
 {
@@ -35,7 +38,11 @@ namespace MyTripz
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
 
             services.AddLogging();
             var connection = @"Server=.\sqlexpress;Database=Tripz;Trusted_Connection=True;";
@@ -64,6 +71,12 @@ namespace MyTripz
             //    await context.Response.WriteAsync("Hello World!");
             //});
             app.UseStaticFiles();
+
+            Mapper.Initialize( config =>
+                    {
+                        config.CreateMap<Trip, TripViewModel>().ReverseMap();
+                    }
+                );
 
             app.UseMvc(config => {
                 config.MapRoute(
