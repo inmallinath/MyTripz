@@ -37,6 +37,7 @@ namespace MyTripz
         {
             services.AddMvc();
 
+            services.AddLogging();
             var connection = @"Server=.\sqlexpress;Database=Tripz;Trusted_Connection=True;";
             services.AddDbContext<TripzContext>(options => options.UseSqlServer(connection));
             services.AddTransient<TripzContextSeedData>();
@@ -51,7 +52,7 @@ namespace MyTripz
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, TripzContextSeedData seeder)
         {
-            //loggerFactory.AddConsole();
+            loggerFactory.AddDebug(LogLevel.Information);
 
             //if (env.IsDevelopment())
             //{
