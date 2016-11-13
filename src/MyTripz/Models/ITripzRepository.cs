@@ -8,5 +8,6 @@ namespace MyTripz.Models
         IEnumerable<Trip> GetTripsWithStops();
         void AddTrip(Trip newTrip);
         bool SaveAll();
+        Trip GetTripByName(string tripName);
     }
 }
