@@ -6,5 +6,7 @@ namespace MyTripz.Models
     {
         IEnumerable<Trip> GetAllTrips();
         IEnumerable<Trip> GetTripsWithStops();
+        void AddTrip(Trip newTrip);
+        bool SaveAll();
     }
 }

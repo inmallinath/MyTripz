@@ -17,6 +17,11 @@ namespace MyTripz.Models
             _logger = logger;
         }
 
+        public void AddTrip(Trip newTrip)
+        {
+            _context.Add(newTrip);
+        }
+
         public IEnumerable<Trip> GetAllTrips()
         {
             try
@@ -44,6 +49,11 @@ namespace MyTripz.Models
                 _logger.LogError("Could not get Trips with Stops from Database", ex);
                 return null;
             }
+        }
+
+        public bool SaveAll()
+        {
+           return _context.SaveChanges() > 0;
         }
     }
 }
