@@ -13,7 +13,8 @@
     "Microsoft.EntityFrameworkCore.Design": "1.0.1",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
-    "AutoMapper": "5.1.1"
+    "AutoMapper": "5.1.1",
+    "System.Net.Http": "4.3.0-preview1-24530-04"
   },
 
   "tools": {

@@ -21,6 +21,7 @@ namespace MyTripz.Models
         {
             var theTrip = GetTripByName(tripName);
             newStop.Order = theTrip.Stops.Max(s => s.Order) + 1;
+            theTrip.Stops.Add(newStop);
             _context.Stops.Add(newStop);
         }
 

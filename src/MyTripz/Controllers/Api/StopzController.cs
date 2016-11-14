@@ -47,7 +47,7 @@ namespace MyTripz.Controllers.Api
             }
         }
 
-        public JsonResult Post(string tripName, [FromBody]StopViewModel vm)
+        public async Task<JsonResult> Post(string tripName, [FromBody]StopViewModel vm)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace MyTripz.Controllers.Api
                     var newStop = Mapper.Map<Stop>(vm);
 
                     //Looking up Geocoordinates
-                    var coordResult = _coordService.Lookup(newStop.Name);
+                    var coordResult = await _coordService.Lookup(newStop.Name);
 
                     if (!coordResult.Success)
                     {
