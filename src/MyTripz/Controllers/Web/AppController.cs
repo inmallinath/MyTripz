@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyTripz.Models;
 using MyTripz.Services;
 using MyTripz.ViewModels;
@@ -21,6 +22,13 @@ namespace MyTripz.Controllers.Web
             _repository = repository;
         }
         public IActionResult Index()
+        {
+           
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Trips()
         {
             var trips = _repository.GetAllTrips();
             return View(trips);
